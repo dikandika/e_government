@@ -15,6 +15,13 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {           return view('home'); });
 
     Route::group(['middleware' => ['role:user']], function () {
+        Route::get('skck', 'SkckController@index')->name('skck.index');
+
+        Route::get('skck/list', 'SkckController@getSkck')->name('skck.list');
+        Route::get('skck/create', 'SkckController@create')->name('skck.create');
+        Route::post('skck/store',        'SkckController@store')->name('skck.store');
+
+
         Route::get('/colors', function () {     return view('dashboard.colors'); });
         Route::get('/typography', function () { return view('dashboard.typography'); });
         Route::get('/charts', function () {     return view('dashboard.charts'); });

@@ -10,14 +10,14 @@ class ServiceHistory extends Model
 
     use HasFactory;
 
-    protected $table = 'notes';
+    protected $table = 'service_history';
 
     /**
      * Get the User that owns the ServiceHistory.
      */
     public function update_by()
     {
-        return $this->belongsTo('App\Models\User', 'UpdateBy')->withTrashed();
+        return $this->belongsTo('App\Models\User', 'update_by')->withTrashed();
     }
 
     /**
@@ -25,6 +25,6 @@ class ServiceHistory extends Model
      */
     public function status()
     {
-        return $this->belongsTo('App\Models\business\Status', 'Status');
+        return $this->belongsTo('App\Models\business\Status', 'status');
     }
 }
