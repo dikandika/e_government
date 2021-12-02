@@ -15,19 +15,27 @@
                   </div>
             </div>
               <div class="card-body">
-                <table class="table table-striped table-bordered yajra-datatable">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>NIK</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                @if(Session::has('message'))
+                      <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                  @endif
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table table-striped table-bordered yajra-datatable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>No</th>
+                                <th>NIK</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                
               </div>
           </div>
         </div>
@@ -35,17 +43,59 @@
     </div>
   </div>
 
+
+
+  <div class="modal fade" id="remove-skck-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete SKCK</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('skck.delete') }}" method="POST">
+                    @csrf
+                    {{-- <input type="hidden" name="thisFolder" value="{{ $thisFolder }}"> --}}
+                    <input type="hidden" name="id" value="" id="skck-delete-id">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content-->
+    </div>
+    <!-- /.modal-dialog-->
+</div>
+
 @endsection
 
 
 @section('javascript')
 <script type="text/javascript">
     $(function () {
+
+      const deleteModal = new coreui.Modal(document.getElementById('remove-skck-modal'));
+      const deleteId = document.getElementById('skck-delete-id');
+
+      // deleteModal.show();
+
+    //   const showModal = function(e){
+    //     // document.getElementById('file-delete-file-id').value = e.target.getAttribute('atr')
+    //     self.deleteModal.show();
+    // }
+
+      
+    //   for(let i=0; i<deleteButtons.length; i++){
+    //       deleteButtons[i].addEventListener('click', () {} )
+    //   }   
       
       var table = $('.yajra-datatable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('skck.list') }}",
+          ajax: "{{ route('skck.datatable') }}",
           columns: [
               {data: 'DT_RowIndex', name: 'DT_RowIndex'},
               {data: 'nik', name: 'nik'},
@@ -58,6 +108,19 @@
                   searchable: true
               },
           ]
+      });
+
+      table.on( 'draw', function () {
+        const deleteButtons = document.getElementsByClassName('skck-delete-btn');
+
+        console.log(deleteButtons)
+
+          for(let i=0; i<deleteButtons.length; i++){
+              deleteButtons[i].addEventListener('click', function (e) {
+                deleteId.value = e.target.getAttribute('atr')
+                deleteModal.show();
+              } )
+          }  
       });
       
     });

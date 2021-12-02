@@ -16,11 +16,13 @@ Route::group(['middleware' => ['get.menu']], function () {
 
     Route::group(['middleware' => ['role:user']], function () {
         Route::get('skck', 'SkckController@index')->name('skck.index');
-
-        Route::get('skck/list', 'SkckController@getSkck')->name('skck.list');
+        Route::get('skck/datatable', 'SkckController@dataTable')->name('skck.datatable');
         Route::get('skck/create', 'SkckController@create')->name('skck.create');
         Route::post('skck/store',        'SkckController@store')->name('skck.store');
-
+        Route::get('skck/{id}',        'SkckController@show')->name('skck.show');
+        Route::get('skck/{id}/edit',        'SkckController@edit')->name('skck.edit');
+        Route::put('skck/update/{id}',        'SkckController@update')->name('skck.update');
+        Route::post('skck/delete',        'SkckController@delete')->name('skck.delete');
 
         Route::get('/colors', function () {     return view('dashboard.colors'); });
         Route::get('/typography', function () { return view('dashboard.typography'); });

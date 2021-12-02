@@ -17,7 +17,7 @@ class ServiceHistory extends Model
      */
     public function update_by()
     {
-        return $this->belongsTo('App\Models\User', 'update_by')->withTrashed();
+        return $this->belongsTo('App\Models\User', 'update_by', 'id')->withTrashed();
     }
 
     /**
@@ -25,6 +25,6 @@ class ServiceHistory extends Model
      */
     public function status()
     {
-        return $this->belongsTo('App\Models\business\Status', 'status');
+        return $this->belongsTo('App\Models\ServiceStatus', 'status', 'status_id');
     }
 }

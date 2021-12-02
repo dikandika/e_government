@@ -11,6 +11,6 @@ class ServiceStatus extends Model
 
     public function service_history()
     {
-        return $this->hasMany('App\Models\Business\ServiceHistory');
+        return $this->hasMany('App\Models\ServiceHistory');
     }
 }

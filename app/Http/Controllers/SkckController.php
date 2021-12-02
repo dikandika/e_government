@@ -8,6 +8,7 @@ use App\Models\ServiceStatus;
 use App\Models\TipeService;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Log;
 
 class SkckController extends Controller
@@ -18,14 +19,20 @@ class SkckController extends Controller
     }
 
 
-    public function getSkck(Request $request)
+    public function dataTable(Request $request)
     {
         if ($request->ajax()) {
             $data = ServiceHistory::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<div class="row">
+                        <div class="col-md-12">
+                            <a href="/skck/' . $row->service_history_id . '" class="edit btn btn-success btn-sm">Show</a> 
+                            <a href="/skck/' . $row->service_history_id . '/edit" class="edit btn btn-warning btn-sm">Edit</a> 
+                            <button class="btn btn-danger btn-sm skck-delete-btn"atr="' . $row->service_history_id . '">Delete</button>
+                        </div>
+                    </div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -50,20 +57,18 @@ class SkckController extends Controller
             'no_hp'         => 'required',
             'email'         => 'required'
         ]);
-        Log::info("file_ktp", [$request->hasFile('file_ktp')]);
-        Log::info("file_selfie_ktp", [$request->hasFile('file_selfie_ktp')]);
-        Log::info("file_kk", [$request->hasFile('file_kk')]);
 
+        $nik = $request->input('nik');
         $user = auth()->user();
 
         $skckService = new ServiceHistory();
         // TIPE SKCK
         $skckService->tipe_id = 1;
-        
+
         $skckService->status = 1;
         $skckService->update_by = $user->id;
 
-        $skckService->nik = $request->input('nik');
+        $skckService->nik = $nik;
         $skckService->nama = $request->input('nama');
         $skckService->alamat = $request->input('alamat');
         $skckService->domisili = $request->input('domisili');
@@ -90,7 +95,8 @@ class SkckController extends Controller
                 $path = $file->path();
                 $oryginalName = $file->getClientOriginalName();
                 if (!empty($skckFolder)) {
-                    $mediaResult = $skckFolder->addMedia($path)->usingFileName(date('YmdHis') . $oryginalName)->usingName($oryginalName)->toMediaCollection();
+                    $saveFilename = "SKCK-" . $attachment . "-" . $nik . "-" . date('YmdHis') . "-" . $oryginalName;
+                    $mediaResult = $skckFolder->addMedia($path)->usingFileName($saveFilename)->usingName($oryginalName)->toMediaCollection();
 
                     if ($attachment == 'file_ktp') {
                         $skckService->url_ktp = $mediaResult->getUrl();
@@ -109,20 +115,123 @@ class SkckController extends Controller
             }
         }
 
-        Log::info("VALIDATE", [$validatedData]);
-
         $skckService->save();
 
-        // $user = auth()->user();
-        // $note = new Notes();
-        // $note->title     = $request->input('title');
-        // $note->content   = $request->input('content');
-        // $note->status_id = $request->input('status_id');
-        // $note->note_type = $request->input('note_type');
-        // $note->applies_to_date = $request->input('applies_to_date');
-        // $note->users_id = $user->id;
-        // $note->save();
-        $request->session()->flash('message', 'Successfully created note');
-        return redirect()->route('notes.index');
+        $request->session()->flash('message', 'SKCK Created');
+        return redirect()->route('skck.index');
+    }
+
+    public function show($id)
+    {
+        $service = ServiceHistory::with('update_by')->with('status')->where('service_history_id', '=', $id)->first()->toArray();
+
+        return view('dashboard.skck.show', ['service' => $service]);
+    }
+
+    public function edit($id)
+    {
+        $service = ServiceHistory::with('update_by')->with('status')->where('service_history_id', '=', $id)->first()->toArray();
+
+        return view('dashboard.skck.edit', ['service' => $service]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nik'             => 'required|min:16|max:20',
+            'nama'           => 'required',
+            'alamat'         => 'required',
+            'domisili'   => 'required',
+            'no_hp'         => 'required',
+            'email'         => 'required'
+        ]);
+
+        $nik = $request->input('nik');
+        $user = auth()->user();
+
+        $skckService = ServiceHistory::where('service_history_id', '=', $id)->first();
+
+        $updatedData = [];
+
+
+        if ($skckService) {
+            // TIPE SKCK
+
+            $updatedData["nik"] = $nik;
+            $updatedData["nama"] = $request->input('nama');
+            $updatedData["alamat"] = $request->input('alamat');
+            $updatedData["domisili"] = $request->input('domisili');
+            $updatedData["no_hp"] = $request->input('no_hp');
+            $updatedData["email"] = $request->input('email');
+            $updatedData["update_by"] = $user->id;
+
+            // ID Folder SKCK = 8
+            $skckFolder = Folder::where('id', '=', 8)->first();
+
+            $attachmentNames = [
+                'file_ktp',
+                'file_selfie_ktp',
+                'file_kk',
+                'file_akte',
+                'file_pass_foto',
+                'file_suket',
+            ];
+
+            for ($i = 0; $i < count($attachmentNames); $i++) {
+                $attachment = $attachmentNames[$i];
+
+                if ($request->hasFile($attachment)) {
+                    $file = $request->file($attachment);
+                    $path = $file->path();
+                    $oryginalName = $file->getClientOriginalName();
+                    if (!empty($skckFolder)) {
+                        $saveFilename = "SKCK-" . $attachment . "-" . $nik . "-" . date('YmdHis') . "-" . $oryginalName;
+                        $mediaResult = $skckFolder->addMedia($path)->usingFileName($saveFilename)->usingName($oryginalName)->toMediaCollection();
+
+                        if ($attachment == 'file_ktp') {
+                            $updatedData["url_ktp"] = $mediaResult->getUrl();
+                        } elseif ($attachment == 'file_selfie_ktp') {
+                            $updatedData["url_selfie"] = $mediaResult->getUrl();
+                        } elseif ($attachment == 'file_kk') {
+                            $updatedData["url_kk"] = $mediaResult->getUrl();
+                        } elseif ($attachment == 'file_akte') {
+                            $updatedData["url_akta_lahir"] = $mediaResult->getUrl();
+                        } elseif ($attachment == 'file_pass_foto') {
+                            $updatedData["url_pass_foto"] = $mediaResult->getUrl();
+                        } elseif ($attachment == 'file_suket') {
+                            $updatedData["url_suket"] = $mediaResult->getUrl();
+                        }
+                    }
+                }
+            }
+
+            Log::info("UPDATED DATA", [$updatedData]);
+
+            $result = ServiceHistory::where('service_history_id', '=', $id)->update($updatedData);
+
+            $request->session()->flash('message', 'SKCK Updated');
+            return redirect()->route('skck.index');
+        } else {
+            $request->session()->flash('message', 'SKCK Updated');
+            return redirect()->route('skck.edit', ['id'=>$id]);
+        }
+    }
+
+    public function delete(Request $request){
+        $validatedData = $request->validate([
+            'id'            => 'required|numeric'
+        ]);
+
+        $id = $request->input('id');
+
+        $result = ServiceHistory::where('service_history_id', $id)->delete();
+
+        if ($result) {
+            $request->session()->flash('message', 'SKCK Deleted');
+        } else {
+            $request->session()->flash('message', 'SKCK Delete Failed');
+        }
+
+        return redirect()->route('skck.index'); 
     }
 }
