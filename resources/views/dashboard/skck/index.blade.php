@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="animated fadeIn">
       <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="col-md-12">
           <div class="card">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -21,6 +21,13 @@
                 <div class="row">
                   <div class="col-md-12">
                     <table class="table table-striped table-bordered yajra-datatable">
+                      <colgroup>
+                        <col/>
+                        <col/>
+                        <col/>
+                        <col/>
+                        <col width="15%"/>
+                      </colgroup>
                         <thead class="thead-dark">
                             <tr>
                                 <th>No</th>
@@ -104,8 +111,8 @@
               {
                   data: 'action', 
                   name: 'action', 
-                  orderable: true, 
-                  searchable: true
+                  orderable: false, 
+                  searchable: false
               },
           ]
       });

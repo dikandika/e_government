@@ -22,17 +22,21 @@ class SkckController extends Controller
     public function dataTable(Request $request)
     {
         if ($request->ajax()) {
-            $data = ServiceHistory::latest()->get();
+            // TIPE_ID SKCK = 1
+            $data = ServiceHistory::where('tipe_id', 1)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<div class="row">
-                        <div class="col-md-12">
-                            <a href="/skck/' . $row->service_history_id . '" class="edit btn btn-success btn-sm">Show</a> 
+                    $actionBtn = '<a href="/skck/' . $row->service_history_id . '" class="edit btn btn-success btn-sm">Show</a> 
                             <a href="/skck/' . $row->service_history_id . '/edit" class="edit btn btn-warning btn-sm">Edit</a> 
-                            <button class="btn btn-danger btn-sm skck-delete-btn"atr="' . $row->service_history_id . '">Delete</button>
-                        </div>
-                    </div>';
+                            <button class="btn btn-danger btn-sm skck-delete-btn"atr="' . $row->service_history_id . '">Delete</button>';
+                    // $actionBtn = '<div class="row">
+                    //     <div class="col-md-12">
+                    //         <a href="/skck/' . $row->service_history_id . '" class="edit btn btn-success btn-sm">Show</a> 
+                    //         <a href="/skck/' . $row->service_history_id . '/edit" class="edit btn btn-warning btn-sm">Edit</a> 
+                    //         <button class="btn btn-danger btn-sm skck-delete-btn"atr="' . $row->service_history_id . '">Delete</button>
+                    //     </div>
+                    // </div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
