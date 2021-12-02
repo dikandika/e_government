@@ -21,7 +21,7 @@
                                     NIK
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="nik" placeholder="NIK"/>
+                                    <input type="text" class="form-control" name="nik" placeholder="NIK" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -29,7 +29,7 @@
                                     Nama Lengkap
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama"/>
+                                    <input type="text" class="form-control" name="nama" placeholder="Nama" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -37,7 +37,7 @@
                                     Alamat
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat"/>
+                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -45,7 +45,7 @@
                                     Domisili
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="domisili" placeholder="Domisili"/>
+                                    <input type="text" class="form-control" name="domisili" placeholder="Domisili" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -53,7 +53,7 @@
                                     No. HP
                                 </th>
                                 <td>
-                                    <input type="phone" class="form-control" name="no_hp" placeholder="no HP"/>
+                                    <input type="phone" class="form-control" name="no_hp" placeholder="no HP" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -61,7 +61,7 @@
                                     Email
                                 </th>
                                 <td>
-                                    <input type="email" class="form-control" name="email" placeholder="Email"/>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -70,7 +70,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_ktp" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_ktp" accept="image/png, image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -80,7 +80,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_selfie_ktp" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_selfie_ktp" accept="image/png, image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -90,7 +90,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_kk" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_kk" accept="image/png, image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -100,7 +100,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_akte" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_akte" accept="image/png, image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -110,7 +110,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_pass_foto" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_pass_foto" accept="image/png, image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -120,7 +120,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_suket" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_suket" accept="image/png, image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>

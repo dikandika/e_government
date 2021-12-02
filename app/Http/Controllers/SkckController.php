@@ -43,8 +43,8 @@ class SkckController extends Controller
     public function create()
     {
         $statuses = ServiceStatus::all();
-        $types = TipeService::all();
-        return view('dashboard.skck.create', ['statuses' => $statuses, 'types' => $types]);
+
+        return view('dashboard.skck.create', ['statuses' => $statuses]);
     }
 
     public function store(Request $request)
@@ -96,7 +96,7 @@ class SkckController extends Controller
                 $oryginalName = $file->getClientOriginalName();
                 if (!empty($skckFolder)) {
                     $saveFilename = "SKCK-" . $attachment . "-" . $nik . "-" . date('YmdHis') . "-" . $oryginalName;
-                    $mediaResult = $skckFolder->addMedia($path)->usingFileName($saveFilename)->usingName($oryginalName)->toMediaCollection();
+                    $mediaResult = $skckFolder->addMedia($path)->usingFileName($saveFilename)->usingName($saveFilename)->toMediaCollection();
 
                     if ($attachment == 'file_ktp') {
                         $skckService->url_ktp = $mediaResult->getUrl();
@@ -130,9 +130,10 @@ class SkckController extends Controller
 
     public function edit($id)
     {
+        $statuses = ServiceStatus::all();
         $service = ServiceHistory::with('update_by')->with('status')->where('service_history_id', '=', $id)->first()->toArray();
 
-        return view('dashboard.skck.edit', ['service' => $service]);
+        return view('dashboard.skck.edit', ['service' => $service, 'statuses' => $statuses]);
     }
 
     public function update(Request $request, $id)
@@ -164,6 +165,7 @@ class SkckController extends Controller
             $updatedData["no_hp"] = $request->input('no_hp');
             $updatedData["email"] = $request->input('email');
             $updatedData["update_by"] = $user->id;
+            $updatedData["status"] = $request->input('status');
 
             // ID Folder SKCK = 8
             $skckFolder = Folder::where('id', '=', 8)->first();

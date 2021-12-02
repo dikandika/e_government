@@ -11,7 +11,7 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div class="p-2"><h4>{{ __('SKCK') }}</h5></div>
-                    <div class="p-2"><a href="{{ route('skck.create') }}" class="btn btn-primary">{{ __('CREATE') }}</a></div>
+                    <div class="p-2"><a href="{{ route('skck.create') }}" class="btn btn-primary">{{ __('Buat SKCK') }}</a></div>
                   </div>
             </div>
               <div class="card-body">

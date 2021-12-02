@@ -15,6 +15,7 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {           return view('home'); });
 
     Route::group(['middleware' => ['role:user']], function () {
+        // SKCK
         Route::get('skck', 'SkckController@index')->name('skck.index');
         Route::get('skck/datatable', 'SkckController@dataTable')->name('skck.datatable');
         Route::get('skck/create', 'SkckController@create')->name('skck.create');

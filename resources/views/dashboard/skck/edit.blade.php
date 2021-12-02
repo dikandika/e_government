@@ -22,7 +22,7 @@
                                     NIK
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="nik" placeholder="NIK" value="{{ $service["nik"] }}"/>
+                                    <input type="text" class="form-control" name="nik" placeholder="NIK" value="{{ $service["nik"] }}" required />
                                 </td>
                             </tr>
                             <tr>
@@ -30,7 +30,7 @@
                                     Nama Lengkap
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{ $service["nama"] }}"/>
+                                    <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{ $service["nama"] }}" required />
                                 </td>
                             </tr>
                             <tr>
@@ -38,7 +38,7 @@
                                     Alamat
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="{{ $service["alamat"] }}"/>
+                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="{{ $service["alamat"] }}" required />
                                 </td>
                             </tr>
                             <tr>
@@ -46,7 +46,7 @@
                                     Domisili
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="domisili" placeholder="Domisili" value="{{ $service["domisili"] }}"/>
+                                    <input type="text" class="form-control" name="domisili" placeholder="Domisili" value="{{ $service["domisili"] }}" required />
                                 </td>
                             </tr>
                             <tr>
@@ -54,7 +54,7 @@
                                     No. HP
                                 </th>
                                 <td>
-                                    <input type="phone" class="form-control" name="no_hp" placeholder="no HP" value="{{ $service["no_hp"] }}"/>
+                                    <input type="phone" class="form-control" name="no_hp" placeholder="no HP" value="{{ $service["no_hp"] }}" required />
                                 </td>
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                                     Email
                                 </th>
                                 <td>
-                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ $service["email"] }}"/>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ $service["email"] }}" required />
                                 </td>
                             </tr>
                             <tr>
@@ -72,7 +72,7 @@
                                 <td>
                                   <div class="form-group">
                                       <label for="file_ktp"><a href="{{ $service["url_ktp"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_ktp" id="file_ktp" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_ktp" id="file_ktp" accept="image/png, image/jpeg" />
                                   </div>
                                 </td>
                             </tr>
@@ -83,7 +83,7 @@
                                 <td>
                                   <div class="form-group">
                                         <label for="file_selfie_ktp"><a href="{{ $service["url_selfie"] }}">Old File</a></label>
-                                        <input type="file" class="form-control-file" name="file_selfie_ktp" id="file_selfie_ktp" accept="image/png, image/jpeg">
+                                        <input type="file" class="form-control-file" name="file_selfie_ktp" id="file_selfie_ktp" accept="image/png, image/jpeg" />
                                   </div>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_kk"><a href="{{ $service["url_kk"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_kk" id="file_kk" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_kk" id="file_kk" accept="image/png, image/jpeg" />
                                   </div>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_akte"><a href="{{ $service["url_akta_lahir"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_akte" id="file_akte" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_akte" id="file_akte" accept="image/png, image/jpeg" />
                                   </div>
                                 </td>
                             </tr>
@@ -116,7 +116,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_pass_foto"><a href="{{ $service["url_akta_lahir"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_pass_foto" id="file_pass_foto" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_pass_foto" id="file_pass_foto" accept="image/png, image/jpeg" />
                                   </div>
                                 </td>
                             </tr>
@@ -127,10 +127,28 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_suket"><a href="{{ $service["url_akta_lahir"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_suket" id="file_suket" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control-file" name="file_suket" id="file_suket" accept="image/png, image/jpeg" />
                                   </div>
                                 </td>
                             </tr>
+                            @if (count($statuses) > 0)
+                                <tr>
+                                    <th>
+                                        Select
+                                    </th>
+                                    <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="status" name="status">
+                                            @foreach ($statuses as $status)
+                                                <option value="{{$status->status_id}}" {{$service["status"]["status_id"] == $status->status_id ? "selected" : ""}}>{{$status->status_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    </td>
+                                </tr>
+                            @endif
+
+                            
                         </tbody>
                     </table>
                     <button class="btn btn-primary" type="submit">Update</button>
