@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => ['get.menu']], function () {
-    Route::get('/', function () {           return view('home'); });
+    Route::get('/', function () { return view('home'); })->name('home');
 
     Route::group(['middleware' => ['role:user']], function () {
         // SKCK

@@ -20,7 +20,7 @@
                     <nav class="nav navdss_container">
 
 						@auth
-						<a class="btn dropbtn" href="/logout">Log Out</a>
+                        <form action="{{ url('/logout') }}" method="POST"> @csrf <button type="submit" class="btn dropbtn">Log Out</button></form>
 						@endauth
 						@guest
 						<a class="btn dropbtn" href="/login">Log In</a>
@@ -158,11 +158,17 @@
 <p style="font-size: 16px;">&nbsp; &nbsp;&nbsp;</p>
 
 </div>
+<div class="text parbase aem-GridColumn aem-GridColumn--default--12" style="padding: 0px 100px">
+    @if(Session::has('message'))
+        <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+    @endif
+</div>
 <div class="paddedlayout responsivegrid aem-GridColumn aem-GridColumn--default--12">
 <div style="padding:0px;">
 <div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--tablet--12 aem-Grid--phone--12 customlayoutclass portletlayoutcontainer" style="padding: 0px 15px; background-color: transparent;  min-height: 0px;  margin: 0px auto; height: auto; position: relative;   max-width: 1220px;   align-items: ;   ">
     
     <div class="portlet aem-GridColumn--offset--tablet--0 aem-GridColumn--default--none aem-GridColumn--phone--none aem-GridColumn--phone--12 aem-GridColumn--tablet--none aem-GridColumn aem-GridColumn--tablet--6 aem-GridColumn--offset--phone--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4">
+        
 
 <div class="main-head portletdiv  citizenservice  " style="">
 	<a href="/skck" target="_self" style="text-decoration: none; cursor: pointer;">
@@ -325,9 +331,11 @@
         <div class="containerdss">
             <div class="footer-wrap">
                 <div class="col-md-12 footer-wrap__header">
-                    <h2 class="h2dss h2font">Singapore Police Force</h2>
+                    <h2 class="h2dss h2font">E-Services</h2>
                 </div>
-                <div class="footer__columns">
+
+
+                {{-- <div class="footer__columns">
                     <div class="col-md-2 col-xs-12">
                         <div class="footer-item footer-item--has-level2">
                             <div class="footer-item__header">
@@ -384,9 +392,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="footer__common">
+                {{-- <div class="footer__common">
                     <div class="footer-common__links col-md-12 col-xs-12">
                         <div class="footer-common__links-container">
                             <a href="https://www.sgsecure.sg" title="Go to SG Secure page" target=""><img id="sgsecure" src="/content/dam/spfpolicehub/sgsecure.png" alt="SGSecure Logo" class="secureLogo"></a>
@@ -404,19 +412,19 @@
                             <a href="https://www.youtube.com/channel/UCVHslVZDC3bT0RdYF5a7vhw" title="Find us on Youtube" target="_blank" rel="noopener noreferrer"><span class="icon icon-youtube"></span></a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="clear"></div>
                 <div class="footer__legal">
-                    <div class="footer__legal-links">
+                    {{-- <div class="footer__legal-links">
                         <a href="https://www.police.gov.sg/Site-Map" target="" title="Go to Site Map page">Site Map</a>
                         <a href="https://www.police.gov.sg/Privacy-Statement" target="" title="Go to Privacy Statement page">Privacy Statement</a>
                         <a href="https://www.police.gov.sg/Terms-of-Use" target="" title="Go to Terms of Use page">Terms of Use</a>
                         <a href="https://www.reach.gov.sg" target="_blank" rel="noopener noreferrer" title="Go to Share Your Views @ Reach page">Share Your Views @ Reach</a>
                         <a href="https://www.police.gov.sg/report-vulnerability" target="" title="Go to Report Vulnerability page">Report Vulnerability</a>
-                    </div>
+                    </div> --}}
 
                     <div class="footer__copyright-container">
-                        <span class="copyright">© 2021 Government of Singapore. <span> Last updated 23 November 2021</span></span>
+                        {{-- <span class="copyright">© 2021</span> --}}
                     </div>
                 </div>
                 <div class="clear"></div>

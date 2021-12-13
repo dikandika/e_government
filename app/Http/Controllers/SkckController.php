@@ -13,9 +13,22 @@ use Illuminate\Support\Facades\Log;
 
 class SkckController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    private function isAdmin() {
+        return auth()->user()->roles()->where('name', 'admin')->exists();
+    }
+
     public function index()
     {
-        return view('dashboard.skck.index');
+        if ($this->isAdmin()) {
+            return view('dashboard.skck.index');
+        } else {
+            return redirect()->route('skck.create');
+        }
     }
 
 
@@ -122,7 +135,12 @@ class SkckController extends Controller
         $skckService->save();
 
         $request->session()->flash('message', 'SKCK Created');
-        return redirect()->route('skck.index');
+        
+        if ($this->isAdmin()) {
+            return redirect()->route('skck.index');
+        } else {
+            return redirect()->route('skck.create');
+        }
     }
 
     public function show($id)

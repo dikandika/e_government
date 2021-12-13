@@ -13,9 +13,22 @@ use Illuminate\Support\Facades\Log;
 
 class IzinKeramaianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    private function isAdmin() {
+        return auth()->user()->roles()->where('name', 'admin')->exists();
+    }
+    
     public function index()
     {
-        return view('dashboard.izin_keramaian.index');
+        if ($this->isAdmin()) {
+            return view('dashboard.izin_keramaian.index');
+        } else {
+            return redirect()->route('izin_keramaian.create');
+        }
     }
 
 
@@ -122,7 +135,12 @@ class IzinKeramaianController extends Controller
         $skckService->save();
 
         $request->session()->flash('message', 'Izin Keramaian Created');
-        return redirect()->route('izin_keramaian.index');
+
+        if ($this->isAdmin()) {
+            return redirect()->route('izin_keramaian.index');
+        } else {
+            return redirect()->route('izin_keramaian.create');
+        }
     }
 
     public function show($id)

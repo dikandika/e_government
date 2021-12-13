@@ -13,9 +13,22 @@ use Illuminate\Support\Facades\Log;
 
 class PengawalanJalanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    private function isAdmin() {
+        return auth()->user()->roles()->where('name', 'admin')->exists();
+    }
+    
     public function index()
     {
-        return view('dashboard.pengawalan_jalan.index');
+        if ($this->isAdmin()) {
+            return view('dashboard.pengawalan_jalan.index');
+        } else {
+            return redirect()->route('pengawalan_jalan.create');
+        }
     }
 
 
@@ -122,7 +135,12 @@ class PengawalanJalanController extends Controller
         $skckService->save();
 
         $request->session()->flash('message', 'Pengawalan Jalan Created');
-        return redirect()->route('pengawalan_jalan.index');
+
+        if ($this->isAdmin()) {
+            return redirect()->route('pengawalan_jalan.index');
+        } else {
+            return redirect()->route('pengawalan_jalan.create');
+        }
     }
 
     public function show($id)
