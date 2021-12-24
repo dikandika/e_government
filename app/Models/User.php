@@ -16,7 +16,7 @@ class User extends Authenticatable
     use HasRoles;
     use HasFactory;
     
-    protected $table = 'users';
+    protected $table = 'administrators';
 
     /**
      * The attributes that are mass assignable.
