@@ -15,6 +15,10 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () { return view('home'); })->name('home');
 
     Route::group(['middleware' => ['role:user']], function () {
+        // REPORT
+        Route::get('report', 'ReportController@index')->name('report.index');
+        Route::get('report/datachart', 'ReportController@dataChart')->name('report.datachart');
+
         // SKCK
         Route::get('skck', 'SkckController@index')->name('skck.index');
         Route::get('skck/datatable', 'SkckController@dataTable')->name('skck.datatable');
