@@ -121,7 +121,7 @@
                             @if (count($statuses) > 0)
                                 <tr>
                                     <th>
-                                        Select
+                                        Status
                                     </th>
                                     <td>
                                     <div class="form-group">
