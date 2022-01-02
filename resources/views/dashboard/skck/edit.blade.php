@@ -83,7 +83,7 @@
                                 <td>
                                   <div class="form-group">
                                         <label for="file_selfie_ktp"><a href="{{ $service["url_selfie"] }}">Old File</a></label>
-                                        <input type="file" class="form-control-file" name="file_selfie_ktp" id="file_selfie_ktp" accept="image/png, image/jpeg" />
+                                        <input type="file" class="form-control-file" name="file_selfie_ktp" id="file_selfie_ktp" accept="application/pdf" />
                                   </div>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_kk"><a href="{{ $service["url_kk"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_kk" id="file_kk" accept="image/png, image/jpeg" />
+                                    <input type="file" class="form-control-file" name="file_kk" id="file_kk" accept="application/pdf" />
                                   </div>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_akte"><a href="{{ $service["url_akta_lahir"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_akte" id="file_akte" accept="image/png, image/jpeg" />
+                                    <input type="file" class="form-control-file" name="file_akte" id="file_akte" accept="application/pdf" />
                                   </div>
                                 </td>
                             </tr>
@@ -116,7 +116,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_pass_foto"><a href="{{ $service["url_akta_lahir"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_pass_foto" id="file_pass_foto" accept="image/png, image/jpeg" />
+                                    <input type="file" class="form-control-file" name="file_pass_foto" id="file_pass_foto" accept="application/pdf" />
                                   </div>
                                 </td>
                             </tr>
@@ -127,7 +127,7 @@
                                 <td>
                                   <div class="form-group">
                                     <label for="file_suket"><a href="{{ $service["url_akta_lahir"] }}">Old File</a></label>
-                                    <input type="file" class="form-control-file" name="file_suket" id="file_suket" accept="image/png, image/jpeg" />
+                                    <input type="file" class="form-control-file" name="file_suket" id="file_suket" accept="application/pdf" />
                                   </div>
                                 </td>
                             </tr>
@@ -152,7 +152,7 @@
                         </tbody>
                     </table>
                     <button class="btn btn-primary" type="submit">Update</button>
-                    <a class="btn btn-primary" href="{{ route('skck.index') }}">Return</a>
+                    <a class="btn btn-secondary" href="{{ route('skck.index') }}">Return</a>
                 </form>
             </div>
           </div>

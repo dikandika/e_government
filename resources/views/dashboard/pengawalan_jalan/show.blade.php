@@ -29,13 +29,13 @@
                             </div>
                             <div class="col-md-6">
                                 <h4>KTP:</h4>
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_ktp"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_ktp"] }}" target="_blank">Show File</a>
                                 <h4>Foto dengan KTP:</h4>
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_selfie"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_selfie"] }}" target="_blank">Show File</a>
                                 <h4>KK:</h4>
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_suratpermohonan"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_suratpermohonan"] }}" target="_blank">Show File</a>
                                 <h4>Surat Keterangan:</h4> 
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_suket"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_suket"] }}" target="_blank">Show File</a>
                             </div>
                         </div>
                         <br>

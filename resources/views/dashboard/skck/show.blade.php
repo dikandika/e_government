@@ -29,17 +29,17 @@
                             </div>
                             <div class="col-md-6">
                                 <h4>KTP:</h4>
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_ktp"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_ktp"] }}" target="_blank">Show File</a>
                                 <h4>Foto dengan KTP:</h4>
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_selfie"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_selfie"] }}" target="_blank">Show File</a>
                                 <h4>KK:</h4>
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_kk"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_kk"] }}" target="_blank">Show File</a>
                                 <h4>Akte Kelahiran:</h4> 
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_akta_lahir"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_akta_lahir"] }}" target="_blank">Show File</a>
                                 <h4>Pass Foto:</h4> 
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_pass_foto"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_pass_foto"] }}" target="_blank">Show File</a>
                                 <h4>Surat Keterangan:</h4> 
-                                <a class="btn btn-sm btn-light" href="{{ $service["url_suket"] }}">Show File</a>
+                                <a class="btn btn-sm btn-light" href="{{ $service["url_suket"] }}" target="_blank">Show File</a>
                             </div>
                         </div>
                         <br>

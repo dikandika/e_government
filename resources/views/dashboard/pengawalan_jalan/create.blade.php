@@ -70,7 +70,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_ktp" accept="image/png, image/jpeg" required/>
+                                    <input type="file" class="form-control-file" name="file_ktp" accept="application/pdf" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -80,7 +80,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_selfie_ktp" accept="image/png, image/jpeg" required/>
+                                    <input type="file" class="form-control-file" name="file_selfie_ktp" accept="image/jpeg" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -90,7 +90,7 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_surat_permohonan" accept="image/png, image/jpeg" required/>
+                                    <input type="file" class="form-control-file" name="file_surat_permohonan" accept="application/pdf" required/>
                                   </div>
                                 </td>
                             </tr>
@@ -100,14 +100,14 @@
                                 </th>
                                 <td>
                                   <div class="form-group">
-                                    <input type="file" class="form-control-file" name="file_suket" accept="image/png, image/jpeg" required/>
+                                    <input type="file" class="form-control-file" name="file_suket" accept="application/pdf" required/>
                                   </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <a class="btn btn-primary" href="{{ route('pengawalan_jalan.index') }}">Return</a>
+                    <a class="btn btn-secondary" href="{{ route('pengawalan_jalan.index') }}">Return</a>
                 </form>
             </div>
           </div>
