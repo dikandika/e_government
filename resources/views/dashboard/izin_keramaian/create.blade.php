@@ -12,6 +12,15 @@
                 @if(Session::has('message'))
                     <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('izin_keramaian.store') }}" method="POST" enctype='multipart/form-data'>
                     @csrf
                     <table class="table table-bordered datatable">
@@ -21,7 +30,7 @@
                                     NIK
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="nik" placeholder="NIK" required/>
+                                    <input type="text" class="form-control" name="nik" placeholder="NIK" value="{{ old('nik') ?? "" }}" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -29,7 +38,7 @@
                                     Nama Lengkap
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama" required/>
+                                    <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{ old('nama') ?? "" }}" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -37,7 +46,7 @@
                                     Alamat
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" required/>
+                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="{{ old('alamat') ?? "" }}" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -45,7 +54,7 @@
                                     Domisili
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" name="domisili" placeholder="Domisili" required/>
+                                    <input type="text" class="form-control" name="domisili" placeholder="Domisili" value="{{ old('domisili') ?? "" }}" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -53,7 +62,7 @@
                                     No. HP
                                 </th>
                                 <td>
-                                    <input type="phone" class="form-control" name="no_hp" placeholder="no HP" required/>
+                                    <input type="phone" class="form-control" name="no_hp" placeholder="no HP" value="{{ old('no_hp') ?? "" }}" required/>
                                 </td>
                             </tr>
                             <tr>
@@ -61,7 +70,7 @@
                                     Email
                                 </th>
                                 <td>
-                                    <input type="email" class="form-control" name="email" placeholder="Email" required/>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') ?? "" }}" required/>
                                 </td>
                             </tr>
                             <tr>
