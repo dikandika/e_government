@@ -43,13 +43,6 @@ class SkckController extends Controller
                     $actionBtn = '<a href="/skck/' . $row->service_history_id . '" class="edit btn btn-success btn-sm">Show</a> 
                             <a href="/skck/' . $row->service_history_id . '/edit" class="edit btn btn-warning btn-sm">Edit</a> 
                             <button class="btn btn-danger btn-sm skck-delete-btn"atr="' . $row->service_history_id . '">Delete</button>';
-                    // $actionBtn = '<div class="row">
-                    //     <div class="col-md-12">
-                    //         <a href="/skck/' . $row->service_history_id . '" class="edit btn btn-success btn-sm">Show</a> 
-                    //         <a href="/skck/' . $row->service_history_id . '/edit" class="edit btn btn-warning btn-sm">Edit</a> 
-                    //         <button class="btn btn-danger btn-sm skck-delete-btn"atr="' . $row->service_history_id . '">Delete</button>
-                    //     </div>
-                    // </div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
