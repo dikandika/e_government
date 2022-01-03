@@ -86,18 +86,6 @@
 
       const deleteModal = new coreui.Modal(document.getElementById('remove-skck-modal'));
       const deleteId = document.getElementById('skck-delete-id');
-
-      // deleteModal.show();
-
-    //   const showModal = function(e){
-    //     // document.getElementById('file-delete-file-id').value = e.target.getAttribute('atr')
-    //     self.deleteModal.show();
-    // }
-
-      
-    //   for(let i=0; i<deleteButtons.length; i++){
-    //       deleteButtons[i].addEventListener('click', () {} )
-    //   }   
       
       var table = $('.yajra-datatable').DataTable({
           processing: true,
@@ -119,8 +107,6 @@
 
       table.on( 'draw', function () {
         const deleteButtons = document.getElementsByClassName('skck-delete-btn');
-
-        console.log(deleteButtons)
 
           for(let i=0; i<deleteButtons.length; i++){
               deleteButtons[i].addEventListener('click', function (e) {

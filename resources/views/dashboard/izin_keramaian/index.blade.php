@@ -85,19 +85,7 @@
     $(function () {
 
       const deleteModal = new coreui.Modal(document.getElementById('remove-izin_keramaian-modal'));
-      const deleteId = document.getElementById('izin_keramaian-delete-id');
-
-      // deleteModal.show();
-
-    //   const showModal = function(e){
-    //     // document.getElementById('file-delete-file-id').value = e.target.getAttribute('atr')
-    //     self.deleteModal.show();
-    // }
-
-      
-    //   for(let i=0; i<deleteButtons.length; i++){
-    //       deleteButtons[i].addEventListener('click', () {} )
-    //   }   
+      const deleteId = document.getElementById('izin_keramaian-delete-id'); 
       
       var table = $('.yajra-datatable').DataTable({
           processing: true,
