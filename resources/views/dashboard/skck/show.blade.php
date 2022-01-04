@@ -25,7 +25,7 @@
                                 <h4>Status: </h4>
                                 <p>{{ $service["status"]["status_name"] }}</p>
                                 <h4>Update By:</h4>
-                                <p>{{ $service["update_by"]["name"] }}</p>
+                                <p>{{ $service["update_by"]["name"] ?? "-" }}</p>
                             </div>
                             <div class="col-md-6">
                                 <h4>KTP:</h4>
@@ -43,8 +43,12 @@
                             </div>
                         </div>
                         <br>
-                        
-                        <a href="{{ route('skck.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                        @auth
+                          <a href="{{ route('skck.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                        @endauth
+                        @guest
+                        <a href="{{ route('home') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                        @endguest
                     </div>
                 </div>
               </div>

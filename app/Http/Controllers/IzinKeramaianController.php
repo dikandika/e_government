@@ -15,11 +15,15 @@ class IzinKeramaianController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     private function isAdmin() {
-        return auth()->user()->roles()->where('name', 'admin')->exists();
+        $user = auth()->user();
+        if ($user) {
+            return $user->roles()->where('name', 'admin')->exists();
+        }
+        return false;
     }
     
     public function index()
@@ -27,7 +31,7 @@ class IzinKeramaianController extends Controller
         if ($this->isAdmin()) {
             return view('dashboard.izin_keramaian.index');
         } else {
-            return redirect()->route('izin_keramaian.create');
+            return redirect()->route('izin_keramaian.home');
         }
     }
 
@@ -64,7 +68,7 @@ class IzinKeramaianController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nik'             => 'required|min:16|max:20',
+            'nik'             => 'required|numeric|digits:16|unique:service_history,nik,2,tipe_id',
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
@@ -79,8 +83,10 @@ class IzinKeramaianController extends Controller
         // TIPE Izin Keramaian
         $skckService->tipe_id = 2;
 
-        $skckService->status = 1;
-        $skckService->update_by = $user->id;
+        $skckService->status = 0;
+        if ($user) {
+            $skckService->update_by = $user->id;
+        }
 
         $skckService->nik = $nik;
         $skckService->nama = $request->input('nama');
@@ -139,7 +145,7 @@ class IzinKeramaianController extends Controller
         if ($this->isAdmin()) {
             return redirect()->route('izin_keramaian.index');
         } else {
-            return redirect()->route('izin_keramaian.create');
+            return redirect()->route('izin_keramaian.guest.show', ['id' => $skckService->id]);
         }
     }
 
@@ -161,7 +167,7 @@ class IzinKeramaianController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nik'             => 'required|min:16|max:20',
+            'nik'             => 'required|numeric|min:16|max:16',
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
@@ -232,8 +238,6 @@ class IzinKeramaianController extends Controller
                 }
             }
 
-            Log::info("UPDATED DATA", [$updatedData]);
-
             $result = ServiceHistory::where('service_history_id', '=', $id)->update($updatedData);
 
             $request->session()->flash('message', 'Izin Keramaian Updated');
@@ -260,5 +264,28 @@ class IzinKeramaianController extends Controller
         }
 
         return redirect()->route('izin_keramaian.index'); 
+    }
+
+    public function home()
+    {
+        return view('dashboard.izin_keramaian.home');
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'nik' => 'required|numeric|digits:16'
+        ]);
+
+        $nik = $request->input('nik');
+
+        $service = ServiceHistory::with('update_by')->with('status')->where('nik', '=', $nik)->where('tipe_id', '=', 2)->first();
+        if ($service) {
+            return redirect()->route('izin_keramaian.guest.show', ['id' => $service->service_history_id]);
+        } else {
+            $request->session()->flash('alert', 'alert-danger');
+            $request->session()->flash('message', 'Pengajuan Izin Keramaian dengan NIK ' .$nik. ' tidak ditemukan');
+            return redirect()->route('izin_keramaian.home');
+        }
     }
 }

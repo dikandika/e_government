@@ -136,7 +136,13 @@
                         </tbody>
                     </table>
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <a class="btn btn-secondary" href="{{ route('skck.index') }}">Return</a>
+                    @auth
+                        <a class="btn btn-secondary" href="{{ route('skck.index') }}">Return</a>
+                    @endauth
+
+                    @guest
+                        <a class="btn btn-secondary" href="{{ route('skck.home') }}">Return</a>
+                    @endguest
                 </form>
             </div>
           </div>

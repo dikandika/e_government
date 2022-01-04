@@ -29,7 +29,7 @@
                         </svg>
                       </span>
                     </div>
-                    <input class="form-control" type="text" placeholder="{{ __('E-Mail Address') }}" name="email" value="{{ old('email') }}" required autofocus>
+                    <input class="form-control" type="email" placeholder="{{ __('E-Mail Address') }}" name="email" value="{{ old('email') }}" required autofocus>
                     </div>
                     <div class="input-group mb-4">
                     <div class="input-group-prepend">
@@ -46,19 +46,19 @@
                         <button class="btn btn-primary px-4" type="submit">{{ __('Login') }}</button>
                     </div>
                     </form>
-                    <div class="col-6 text-right">
+                    {{-- <div class="col-6 text-right">
                         <a href="{{ route('password.request') }}" class="btn btn-link px-0">{{ __('Forgot Your Password?') }}</a>
-                    </div>
+                    </div> --}}
                     
                     </div>
                     <br>
-                    <div class="row justify-content-center">
+                    {{-- <div class="row justify-content-center">
                       <div class="col-4 text-center">
                         @if (Route::has('password.request'))
                           <a href="{{ route('register') }}" class=" active mt-3">{{ __('Sign Up') }}</a>
                         @endif
                       </div>
-                    </div>
+                    </div> --}}
                     
               </div>
             </div>

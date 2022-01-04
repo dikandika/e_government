@@ -15,11 +15,15 @@ class SkckController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     private function isAdmin() {
-        return auth()->user()->roles()->where('name', 'admin')->exists();
+        $user = auth()->user();
+        if ($user) {
+            return $user->roles()->where('name', 'admin')->exists();
+        }
+        return false;
     }
 
     public function index()
@@ -27,7 +31,7 @@ class SkckController extends Controller
         if ($this->isAdmin()) {
             return view('dashboard.skck.index');
         } else {
-            return redirect()->route('skck.create');
+            return redirect()->route('skck.home');
         }
     }
 
@@ -60,11 +64,11 @@ class SkckController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nik'             => 'required|min:16|max:20',
+            'nik'             => 'required|numeric|digits:16',
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
-            'no_hp'         => 'required',
+            'no_hp'         => 'required|numeric',
             'email'         => 'required'
         ]);
 
@@ -75,8 +79,10 @@ class SkckController extends Controller
         // TIPE SKCK
         $skckService->tipe_id = 1;
 
-        $skckService->status = 1;
-        $skckService->update_by = $user->id;
+        $skckService->status = 0;
+        if ($user) {
+            $skckService->update_by = $user->id;
+        }
 
         $skckService->nik = $nik;
         $skckService->nama = $request->input('nama');
@@ -132,7 +138,7 @@ class SkckController extends Controller
         if ($this->isAdmin()) {
             return redirect()->route('skck.index');
         } else {
-            return redirect()->route('skck.create');
+            return redirect()->route('skck.guest.show', ['id' => $skckService->id]);
         }
     }
 
@@ -154,7 +160,7 @@ class SkckController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nik'             => 'required|min:16|max:20',
+            'nik'             => 'required|numeric|digits:16',
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
@@ -250,5 +256,28 @@ class SkckController extends Controller
         }
 
         return redirect()->route('skck.index'); 
+    }
+
+    public function home()
+    {
+        return view('dashboard.skck.home');
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'nik' => 'required|numeric|digits:16'
+        ]);
+
+        $nik = $request->input('nik');
+
+        $service = ServiceHistory::with('update_by')->with('status')->where('nik', '=', $nik)->where('tipe_id', '=', 1)->first();
+        if ($service) {
+            return redirect()->route('skck.guest.show', ['id' => $service->service_history_id]);
+        } else {
+            $request->session()->flash('alert', 'alert-danger');
+            $request->session()->flash('message', 'Pengajuan SKCK dengan NIK ' .$nik. ' tidak ditemukan');
+            return redirect()->route('skck.home');
+        }
     }
 }

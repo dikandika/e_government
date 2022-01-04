@@ -116,7 +116,13 @@
                         </tbody>
                     </table>
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <a class="btn btn-secondary" href="{{ route('izin_keramaian.index') }}">Return</a>
+                    @auth
+                        <a class="btn btn-secondary" href="{{ route('izin_keramaian.index') }}">Return</a>
+                    @endauth
+
+                    @guest
+                        <a class="btn btn-secondary" href="{{ route('izin_keramaian.home') }}">Return</a>
+                    @endguest
                 </form>
             </div>
           </div>

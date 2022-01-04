@@ -14,6 +14,25 @@
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () { return view('home'); })->name('home');
 
+    Route::get('skck/home', 'SkckController@home')->name('skck.home');
+    Route::post('skck/search', 'SkckController@search')->name('skck.search');
+    Route::get('skck/guest/create', 'SkckController@create')->name('skck.guest.create');
+    Route::post('skck/store',        'SkckController@store')->name('skck.store');
+    Route::get('skck/guest/{id}',        'SkckController@show')->name('skck.guest.show');
+
+    Route::get('izin-keramaian/home', 'IzinKeramaianController@home')->name('izin_keramaian.home');
+    Route::post('izin-keramaian/search', 'IzinKeramaianController@search')->name('izin_keramaian.search');
+    Route::get('izin-keramaian/guest/create', 'IzinKeramaianController@create')->name('izin_keramaian.guest.create');
+    Route::post('izin-keramaian/store',        'IzinKeramaianController@store')->name('izin_keramaian.store');
+    Route::get('izin-keramaian/guest/{id}',        'IzinKeramaianController@show')->name('izin_keramaian.guest.show');
+
+    Route::get('pengawalan-jalan/home', 'PengawalanJalanController@home')->name('pengawalan_jalan.home');
+    Route::post('pengawalan-jalan/search', 'PengawalanJalanController@search')->name('pengawalan_jalan.search');
+    Route::get('pengawalan-jalan/guest/create', 'PengawalanJalanController@create')->name('pengawalan_jalan.guest.create');
+    Route::post('pengawalan-jalan/store',        'PengawalanJalanController@store')->name('pengawalan_jalan.store');
+    Route::get('pengawalan-jalan/guest/{id}',        'PengawalanJalanController@show')->name('pengawalan_jalan.guest.show');
+
+
     Route::group(['middleware' => ['role:user']], function () {
         // REPORT
         Route::get('report', 'ReportController@index')->name('report.index');
@@ -23,7 +42,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('skck', 'SkckController@index')->name('skck.index');
         Route::get('skck/datatable', 'SkckController@dataTable')->name('skck.datatable');
         Route::get('skck/create', 'SkckController@create')->name('skck.create');
-        Route::post('skck/store',        'SkckController@store')->name('skck.store');
+        // Route::post('skck/store',        'SkckController@store')->name('skck.store');
         Route::get('skck/{id}',        'SkckController@show')->name('skck.show');
         Route::get('skck/{id}/edit',        'SkckController@edit')->name('skck.edit');
         Route::put('skck/update/{id}',        'SkckController@update')->name('skck.update');
@@ -33,7 +52,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('izin-keramaian', 'IzinKeramaianController@index')->name('izin_keramaian.index');
         Route::get('izin-keramaian/datatable', 'IzinKeramaianController@dataTable')->name('izin_keramaian.datatable');
         Route::get('izin-keramaian/create', 'IzinKeramaianController@create')->name('izin_keramaian.create');
-        Route::post('izin-keramaian/store',        'IzinKeramaianController@store')->name('izin_keramaian.store');
+        // Route::post('izin-keramaian/store',        'IzinKeramaianController@store')->name('izin_keramaian.store');
         Route::get('izin-keramaian/{id}',        'IzinKeramaianController@show')->name('izin_keramaian.show');
         Route::get('izin-keramaian/{id}/edit',        'IzinKeramaianController@edit')->name('izin_keramaian.edit');
         Route::put('izin-keramaian/update/{id}',        'IzinKeramaianController@update')->name('izin_keramaian.update');
@@ -43,7 +62,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('pengawalan-jalan', 'PengawalanJalanController@index')->name('pengawalan_jalan.index');
         Route::get('pengawalan-jalan/datatable', 'PengawalanJalanController@dataTable')->name('pengawalan_jalan.datatable');
         Route::get('pengawalan-jalan/create', 'PengawalanJalanController@create')->name('pengawalan_jalan.create');
-        Route::post('pengawalan-jalan/store',        'PengawalanJalanController@store')->name('pengawalan_jalan.store');
+        // Route::post('pengawalan-jalan/store',        'PengawalanJalanController@store')->name('pengawalan_jalan.store');
         Route::get('pengawalan-jalan/{id}',        'PengawalanJalanController@show')->name('pengawalan_jalan.show');
         Route::get('pengawalan-jalan/{id}/edit',        'PengawalanJalanController@edit')->name('pengawalan_jalan.edit');
         Route::put('pengawalan-jalan/update/{id}',        'PengawalanJalanController@update')->name('pengawalan_jalan.update');

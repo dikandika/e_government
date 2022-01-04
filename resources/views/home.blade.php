@@ -171,41 +171,82 @@
         
 
 <div class="main-head portletdiv  citizenservice  " style="">
-	<a href="/skck" target="_self" style="text-decoration: none; cursor: pointer;">
-		<div class="">
-			<div class="pad-03">
-				<div class="card">
-				
-					<div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-eMedical.jpg); background-color: black;">
-					</div>
+    @auth
+        <a href="/skck" target="_self" style="text-decoration: none; cursor: pointer;">
+            <div class="">
+                <div class="pad-03">
+                    <div class="card">
+                    
+                        <div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-eMedical.jpg); background-color: black;">
+                        </div>
 
-					<div class="bg-white card-txt">
-						<div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-eMedical.jpg);">
-							<div class="svc-text-table">
-								<div class="svc-text-cell">
-									<div class="pad-svccard text-center-tablet-up ">
-										<div class="h5 marg-bot-0 sm portletheader">SKCK</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="show-tablet-up block row bg-img bg-cover">
-							<div class="svc-text-table">
-								<div class="svc-text-cell">
-									<div class="pad-svccard text-center-tablet-up ">
-										<div class="h5 marg-bot-0 sm portletheader">SKCK</div>
-										<div class="show-tablet-up block marg-top-02">
-											<p class="marg-bot-0" style="font-size: 12px;">Surat Keterangan Catatan Kepolisian, sebelumnya dikenal sebagai Surat Keterangan Kelakuan Baik adalah surat keterangan yang diterbitkan oleh Polri yang berisikan catatan kejahatan seseorang</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</a>
+                        <div class="bg-white card-txt">
+                            <div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-eMedical.jpg);">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">SKCK</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="show-tablet-up block row bg-img bg-cover">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">SKCK</div>
+                                            <div class="show-tablet-up block marg-top-02">
+                                                <p class="marg-bot-0" style="font-size: 12px;">Surat Keterangan Catatan Kepolisian, sebelumnya dikenal sebagai Surat Keterangan Kelakuan Baik adalah surat keterangan yang diterbitkan oleh Polri yang berisikan catatan kejahatan seseorang</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    @endauth
+
+    @guest
+        <a href="/skck/home" target="_self" style="text-decoration: none; cursor: pointer;">
+            <div class="">
+                <div class="pad-03">
+                    <div class="card">
+                    
+                        <div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-eMedical.jpg); background-color: black;">
+                        </div>
+
+                        <div class="bg-white card-txt">
+                            <div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-eMedical.jpg);">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">SKCK</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="show-tablet-up block row bg-img bg-cover">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">SKCK</div>
+                                            <div class="show-tablet-up block marg-top-02">
+                                                <p class="marg-bot-0" style="font-size: 12px;">Surat Keterangan Catatan Kepolisian, sebelumnya dikenal sebagai Surat Keterangan Kelakuan Baik adalah surat keterangan yang diterbitkan oleh Polri yang berisikan catatan kejahatan seseorang</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    @endguest
+	
 	<div style="clear:both;"></div>
 </div>
 
@@ -215,7 +256,8 @@
 
 
 <div class="main-head portletdiv popularservice citizenservice  " style="">
-	<a href="/izin-keramaian" target="_self" style="text-decoration: none; cursor: pointer;">
+    @auth
+    <a href="/izin-keramaian" target="_self" style="text-decoration: none; cursor: pointer;">
 		<div class="">
 			<div class="pad-03">
 				<div class="card">
@@ -250,29 +292,23 @@
 			</div>
 		</div>
 	</a>
-	<div style="clear:both;"></div>
-</div>
+    @endauth
 
-
-</div>
-<div class="portlet aem-GridColumn--offset--tablet--0 aem-GridColumn--default--none aem-GridColumn--phone--none aem-GridColumn--phone--12 aem-GridColumn--tablet--none aem-GridColumn aem-GridColumn--tablet--6 aem-GridColumn--offset--phone--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4">
-
-
-<div class="main-head portletdiv popularservice citizenservice  " style="">
-	<a href="/pengawalan-jalan" target="_self" style="text-decoration: none; cursor: pointer;">
+    @guest
+    <a href="/izin-keramaian/home" target="_self" style="text-decoration: none; cursor: pointer;">
 		<div class="">
 			<div class="pad-03">
 				<div class="card">
 				
-					<div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-QDL.jpg); background-color: black;">
+					<div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-certifiedtrue.jpg); background-color: black;">
 					</div>
 
 					<div class="bg-white card-txt">
-						<div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-QDL.jpg);">
+						<div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-certifiedtrue.jpg);">
 							<div class="svc-text-table">
 								<div class="svc-text-cell">
 									<div class="pad-svccard text-center-tablet-up ">
-										<div class="h5 marg-bot-0 sm portletheader">PENGAWALAN JALAN</div>
+										<div class="h5 marg-bot-0 sm portletheader">IZIN KERAMAIAN</div>
 									</div>
 								</div>
 							</div>
@@ -281,9 +317,9 @@
 							<div class="svc-text-table">
 								<div class="svc-text-cell">
 									<div class="pad-svccard text-center-tablet-up ">
-										<div class="h5 marg-bot-0 sm portletheader">PENGAWALAN JALAN</div>
+										<div class="h5 marg-bot-0 sm portletheader">IZIN KERAMAIAN</div>
 										<div class="show-tablet-up block marg-top-02">
-											<p class="marg-bot-0" style="font-size: 12px;">Pengawalan jalan dimaksudkan untuk menjaga kelancaran jalan bagi suatu pihak yang memiliki konsen pribadi.</p>
+											<p class="marg-bot-0" style="font-size: 12px;">Izin keramaian dimaksudkan untuk menjaga suasana yang kondusif bagi semua pihak. Kelancaran suatu acara keramaian pasti harus didukung dengan persiapan pengamanan yang pas.
 										</div>
 									</div>
 								</div>
@@ -294,6 +330,92 @@
 			</div>
 		</div>
 	</a>
+    @endguest
+	<div style="clear:both;"></div>
+</div>
+
+
+</div>
+<div class="portlet aem-GridColumn--offset--tablet--0 aem-GridColumn--default--none aem-GridColumn--phone--none aem-GridColumn--phone--12 aem-GridColumn--tablet--none aem-GridColumn aem-GridColumn--tablet--6 aem-GridColumn--offset--phone--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4">
+
+
+<div class="main-head portletdiv popularservice citizenservice  " style="">
+    @auth
+        <a href="/pengawalan-jalan" target="_self" style="text-decoration: none; cursor: pointer;">
+            <div class="">
+                <div class="pad-03">
+                    <div class="card">
+                    
+                        <div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-QDL.jpg); background-color: black;">
+                        </div>
+
+                        <div class="bg-white card-txt">
+                            <div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-QDL.jpg);">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">PENGAWALAN JALAN</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="show-tablet-up block row bg-img bg-cover">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">PENGAWALAN JALAN</div>
+                                            <div class="show-tablet-up block marg-top-02">
+                                                <p class="marg-bot-0" style="font-size: 12px;">Pengawalan jalan dimaksudkan untuk menjaga kelancaran jalan bagi suatu pihak yang memiliki konsen pribadi.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    @endauth
+
+    @guest
+        <a href="/pengawalan-jalan/home" target="_self" style="text-decoration: none; cursor: pointer;">
+            <div class="">
+                <div class="pad-03">
+                    <div class="card">
+                    
+                        <div class="card-img bg-img bg-cover show-tablet-up block" style="background-image: url(../assets/img/policehub-QDL.jpg); background-color: black;">
+                        </div>
+
+                        <div class="bg-white card-txt">
+                            <div class="hide-tablet-up block row bg-img bg-cover" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../assets/img/policehub-QDL.jpg);">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">PENGAWALAN JALAN</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="show-tablet-up block row bg-img bg-cover">
+                                <div class="svc-text-table">
+                                    <div class="svc-text-cell">
+                                        <div class="pad-svccard text-center-tablet-up ">
+                                            <div class="h5 marg-bot-0 sm portletheader">PENGAWALAN JALAN</div>
+                                            <div class="show-tablet-up block marg-top-02">
+                                                <p class="marg-bot-0" style="font-size: 12px;">Pengawalan jalan dimaksudkan untuk menjaga kelancaran jalan bagi suatu pihak yang memiliki konsen pribadi.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    @endguest
+	
 	<div style="clear:both;"></div>
 </div>
 
