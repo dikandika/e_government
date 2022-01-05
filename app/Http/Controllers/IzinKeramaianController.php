@@ -12,6 +12,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Log;
 use Mail;
 use App\Models\EmailTemplate;
+use Illuminate\Validation\ValidationException;
 
 class IzinKeramaianController extends Controller
 {
@@ -79,6 +80,13 @@ class IzinKeramaianController extends Controller
         ]);
 
         $nik = $request->input('nik');
+
+        // validate if nik is exist
+        $service = ServiceHistory::where('nik', '=', $nik)->where('tipe_id', '=', 2)->first();
+        if ($service) {
+            throw ValidationException::withMessages(['message' => 'Pengajuan SKCK dengan NIK ' . $nik . ' sudah ada']);
+        }
+
         $user = auth()->user();
 
         $skckService = new ServiceHistory();
