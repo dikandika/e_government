@@ -75,7 +75,7 @@ class PengawalanJalanController extends Controller
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
-            'no_hp'         => 'required',
+            'no_hp'         => 'required|numeric',
             'email'         => 'required'
         ]);
 
@@ -181,7 +181,7 @@ class PengawalanJalanController extends Controller
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
-            'no_hp'         => 'required',
+            'no_hp'         => 'required|numeric',
             'email'         => 'required'
         ]);
 

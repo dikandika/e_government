@@ -71,11 +71,11 @@ class IzinKeramaianController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nik'             => 'required|numeric|digits:16|unique:service_history,nik,2,tipe_id',
+            'nik'             => 'required|numeric|digits:16',
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
-            'no_hp'         => 'required',
+            'no_hp'         => 'required|numeric',
             'email'         => 'required'
         ]);
 
@@ -177,11 +177,11 @@ class IzinKeramaianController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nik'             => 'required|numeric|min:16|max:16',
+            'nik'             => 'required|numeric|digits:16',
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
-            'no_hp'         => 'required',
+            'no_hp'         => 'required|numeric',
             'email'         => 'required'
         ]);
 

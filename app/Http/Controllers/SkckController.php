@@ -175,7 +175,7 @@ class SkckController extends Controller
             'nama'           => 'required',
             'alamat'         => 'required',
             'domisili'   => 'required',
-            'no_hp'         => 'required',
+            'no_hp'         => 'required|numeric',
             'email'         => 'required'
         ]);
 
