@@ -12,7 +12,7 @@
               <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">Per Bulan</small></a></div>
             </div>
             <div class="card-body">
-              <div class="c-chart-wrapper">
+              <div class="c-chart-wrapper" style="height: 500px">
                 <canvas id="chartPerMonth"></canvas>
               </div>
             </div>
@@ -93,7 +93,8 @@
           datasets : datasets
         },
         options: {
-          responsive: true
+          responsive: true,
+          maintainAspectRatio: false
         }
       })
     }
