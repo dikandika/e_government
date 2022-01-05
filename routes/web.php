@@ -47,7 +47,8 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('skck/{id}/edit',        'SkckController@edit')->name('skck.edit');
         Route::put('skck/update/{id}',        'SkckController@update')->name('skck.update');
         Route::post('skck/delete',        'SkckController@delete')->name('skck.delete');
-
+        Route::post('skck/process',        'SkckController@process')->name('skck.process');
+        
         // IZIN KERAMAIAN
         Route::get('izin-keramaian', 'IzinKeramaianController@index')->name('izin_keramaian.index');
         Route::get('izin-keramaian/datatable', 'IzinKeramaianController@dataTable')->name('izin_keramaian.datatable');
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('izin-keramaian/{id}/edit',        'IzinKeramaianController@edit')->name('izin_keramaian.edit');
         Route::put('izin-keramaian/update/{id}',        'IzinKeramaianController@update')->name('izin_keramaian.update');
         Route::post('izin-keramaian/delete',        'IzinKeramaianController@delete')->name('izin_keramaian.delete');
+        Route::post('izin-keramaian/process',        'IzinKeramaianController@process')->name('izin_keramaian.process');
 
         // PENGAWALAN JALAN
         Route::get('pengawalan-jalan', 'PengawalanJalanController@index')->name('pengawalan_jalan.index');
@@ -67,6 +69,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('pengawalan-jalan/{id}/edit',        'PengawalanJalanController@edit')->name('pengawalan_jalan.edit');
         Route::put('pengawalan-jalan/update/{id}',        'PengawalanJalanController@update')->name('pengawalan_jalan.update');
         Route::post('pengawalan-jalan/delete',        'PengawalanJalanController@delete')->name('pengawalan_jalan.delete');
+        Route::post('pengawalan-jalan/process',        'PengawalanJalanController@process')->name('pengawalan_jalan.process');
 
         Route::get('/colors', function () {     return view('dashboard.colors'); });
         Route::get('/typography', function () { return view('dashboard.typography'); });

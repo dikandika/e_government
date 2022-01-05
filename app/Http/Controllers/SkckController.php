@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Log;
+use Mail;
+use App\Models\EmailTemplate;
 
 class SkckController extends Controller
 {
@@ -18,7 +20,8 @@ class SkckController extends Controller
         // $this->middleware('auth');
     }
 
-    private function isAdmin() {
+    private function isAdmin()
+    {
         $user = auth()->user();
         if ($user) {
             return $user->roles()->where('name', 'admin')->exists();
@@ -134,7 +137,7 @@ class SkckController extends Controller
         $skckService->save();
 
         $request->session()->flash('message', 'SKCK Created');
-        
+
         if ($this->isAdmin()) {
             return redirect()->route('skck.index');
         } else {
@@ -236,11 +239,12 @@ class SkckController extends Controller
             return redirect()->route('skck.index');
         } else {
             $request->session()->flash('message', 'SKCK Updated');
-            return redirect()->route('skck.edit', ['id'=>$id]);
+            return redirect()->route('skck.edit', ['id' => $id]);
         }
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $validatedData = $request->validate([
             'id'            => 'required|numeric'
         ]);
@@ -255,7 +259,7 @@ class SkckController extends Controller
             $request->session()->flash('message', 'SKCK Delete Failed');
         }
 
-        return redirect()->route('skck.index'); 
+        return redirect()->route('skck.index');
     }
 
     public function home()
@@ -276,8 +280,65 @@ class SkckController extends Controller
             return redirect()->route('skck.guest.show', ['id' => $service->service_history_id]);
         } else {
             $request->session()->flash('alert', 'alert-danger');
-            $request->session()->flash('message', 'Pengajuan SKCK dengan NIK ' .$nik. ' tidak ditemukan');
+            $request->session()->flash('message', 'Pengajuan SKCK dengan NIK ' . $nik . ' tidak ditemukan');
             return redirect()->route('skck.home');
         }
+    }
+
+    public function process(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id'            => 'required|numeric'
+        ]);
+
+        $id = $request->input('id');
+        $type = $request->input('type');
+
+        $skckService = ServiceHistory::where('service_history_id', '=', $id)->first();
+        $updatedData = [];
+        $responseMessage = "";
+        $email = "";
+
+
+        if ($skckService) {
+            $email = $skckService->email;
+
+            if ($type == "approve") {
+                $updatedData["status"] = 1;
+                $responseMessage = "SKCK " . $skckService->nik . " Approved";
+
+                $template = EmailTemplate::find(2);
+                Mail::send([], [], function ($message) use ($email, $template)
+                {
+                    $message->to($email);
+                    $message->subject($template->subject);
+                    $message->setBody($template->content,'text/html');
+                    $message->attach('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf');
+                });
+            } else {
+                $updatedData["status"] = 2;
+                $responseMessage = "SKCK " . $skckService->nik . " Rejected";
+
+                $template = EmailTemplate::find(3);
+                Mail::send([], [], function ($message) use ($email, $template)
+                {
+                    $message->to($email);
+                    $message->subject($template->subject);
+                    $message->setBody($template->content,'text/html');
+                });
+            }
+
+            $result = ServiceHistory::where('service_history_id', '=', $id)->update($updatedData);
+
+            if ($result) {
+                $request->session()->flash('message', $responseMessage);
+            } else {
+                $request->session()->flash('message', $responseMessage);
+            }
+        }
+
+        
+
+        return redirect()->route('skck.index');
     }
 }

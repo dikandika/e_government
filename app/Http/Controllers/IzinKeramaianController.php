@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Log;
+use Mail;
+use App\Models\EmailTemplate;
 
 class IzinKeramaianController extends Controller
 {
@@ -287,5 +289,60 @@ class IzinKeramaianController extends Controller
             $request->session()->flash('message', 'Pengajuan Izin Keramaian dengan NIK ' .$nik. ' tidak ditemukan');
             return redirect()->route('izin_keramaian.home');
         }
+    }
+
+    public function process(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id'            => 'required|numeric'
+        ]);
+
+        $id = $request->input('id');
+        $type = $request->input('type');
+
+        $skckService = ServiceHistory::where('service_history_id', '=', $id)->first();
+        $updatedData = [];
+        $responseMessage = "";
+        $email = "";
+
+
+        if ($skckService) {
+            $email = $skckService->email;
+
+            if ($type == "approve") {
+                $updatedData["status"] = 1;
+                $responseMessage = "SKCK " . $skckService->nik . " Approved";
+
+                $template = EmailTemplate::find(4);
+                Mail::send([], [], function ($message) use ($email, $template)
+                {
+                    $message->to($email);
+                    $message->subject($template->subject);
+                    $message->setBody($template->content,'text/html');
+                    $message->attach('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf');
+                });
+            } else {
+                $updatedData["status"] = 2;
+                $responseMessage = "SKCK " . $skckService->nik . " Rejected";
+
+                $template = EmailTemplate::find(5);
+                Mail::send([], [], function ($message) use ($email, $template)
+                {
+                    $message->to($email);
+                    $message->subject($template->subject);
+                    $message->setBody($template->content,'text/html');
+                });
+            }
+
+            $result = ServiceHistory::where('service_history_id', '=', $id)->update($updatedData);
+
+            if ($result) {
+                $request->session()->flash('message', $responseMessage);
+            } else {
+                $request->session()->flash('message', $responseMessage);
+            }
+        }
+
+        return redirect()->route('izin_keramaian.index');
     }
 }

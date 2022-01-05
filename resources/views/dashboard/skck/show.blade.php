@@ -22,6 +22,8 @@
                                 <p>{{ $service["domisili"] }}</p>
                                 <h4>No Hp:</h4> 
                                 <p>{{ $service["no_hp"] }}</p>
+                                <h4>Email:</h4> 
+                                <p>{{ $service["email"] }}</p>
                                 <h4>Status: </h4>
                                 <p>{{ $service["status"]["status_name"] }}</p>
                                 <h4>Update By:</h4>
@@ -43,12 +45,40 @@
                             </div>
                         </div>
                         <br>
-                        @auth
-                          <a href="{{ route('skck.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
-                        @endauth
-                        @guest
-                        <a href="{{ route('home') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
-                        @endguest
+                        <div class="row">
+                          @auth
+                          @if ($service["status"]["status_id"] == 0)
+                          <div class="col-md-1">
+                              <form action="{{ route('skck.process') }}" method="POST">
+                                  @csrf
+                                  <input type="hidden" name="id" value="{{$service["service_history_id"]}}">
+                                  <input type="hidden" name="type" value="approve">
+                                  <button class="btn btn-success" type="submit">Approve</button>
+                              </form>
+                            </div>
+                            <div class="col-md-1">
+                              <form action="{{ route('skck.process') }}" method="POST">
+                                  @csrf
+                                  <input type="hidden" name="id" value="{{$service["service_history_id"]}}">
+                                  <input type="hidden" name="type" value="reject">
+                                  <button class="btn btn-danger" type="submit">Reject</button>
+                              </form>
+                            </div>
+                            @endif
+                            @endauth
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col-md-12">
+                            @auth
+                              <a href="{{ route('skck.index') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                            @endauth
+                            @guest
+                            <a href="{{ route('home') }}" class="btn btn-block btn-primary">{{ __('Return') }}</a>
+                            @endguest
+                          </div>
+                        </div>
+                        
                     </div>
                 </div>
               </div>
