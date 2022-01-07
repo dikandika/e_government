@@ -93,7 +93,7 @@ class PengawalanJalanController extends Controller
         // TIPE PENGAWALAN JALAN
         $skckService->tipe_id = 3;
 
-        $skckService->status = 1;
+        $skckService->status = 0;
         if ($user) {
             $skckService->update_by = $user->id;
         }
