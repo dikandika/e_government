@@ -48,7 +48,6 @@
           let datasets = [];
 
           if(result && result.length > 0) {
-            console.log("data", data[0])
             const labels = data.map(d => d.month);
 
             data.forEach(d => {
@@ -94,7 +93,16 @@
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          scales: {
+              yAxes: [{
+                  // display: true,
+                  ticks: {
+                      min: 0, // minimum value
+                      max: 100 // maximum value
+                  }
+              }]
+          }
         }
       })
     }
